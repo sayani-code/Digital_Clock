@@ -8,6 +8,7 @@ A simple digital clock application built using Python. The clock displays the cu
 - Updates every second
 - Simple and clean user interface
 - Built using Python and Tkinter
+- Date display
 
 ## 🛠️ Technologies Used
 
@@ -51,7 +52,7 @@ python digital_clock.py
 - Dark/Light mode
 - Alarm feature
 - Stopwatch and Timer
-- Date display
+
 
 ## 🤝 Contributing
 
