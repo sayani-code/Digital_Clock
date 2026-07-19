@@ -1,40 +1,57 @@
 import tkinter as tk
-from time import strftime
+from tkinter import ttk, messagebox
+from datetime import datetime
+import pytz
 
-root=tk.Tk()
-root.title("Digital Clock")
-root.geometry("100x50")
-root.configure(bg="#c3cbb6")
 
-def display():
+# Main Window
+root = tk.Tk()
+root.title("Advanced Digital Clock")
+root.geometry("550x650")
 
-    string=strftime("%H : %M : %S %p \n")
-    current_date = strftime("%A, %d %B %Y")
-    label.config(text=[string,current_date])
-   
-    label.after(1000,display)
-    
-label=tk.Label(root,font=("calibri",30,'bold'),background="#c3cbb6",foreground="#0B3C8A")
-label.pack(anchor="center")
-time_left=300
+bg_dark = "#161D3D"
+fg_dark = "white"
 
-def countdown():
-    global time_left 
-    if time_left>0 :
-        min=time_left//60
-        sec=time_left%60
-        time_text=f"{min:02d}:{sec:02d}"
-        label.config(text=time_text)
-        label.after(1000,countdown)
-        time_left=time_left-1
-    else:
-        label.config(text="Time Overe!")
+bg_light = "white"
+fg_light = "black"
 
-label = tk.Label(root, font=('calibri', 100, 'bold'),background='black', foreground='red')
-label.pack(anchor='center')
-countdown()
+root.configure(bg=bg_dark)
 
-display()
 
+#Current Time and Date 
+time_label = tk.Label(root, font=("Arial", 40, "bold"),
+                      bg=bg_dark, fg=fg_dark)
+time_label.pack(pady=10)
+
+date_label = tk.Label(root, font=("Arial", 16),
+                      bg=bg_dark, fg=fg_dark)
+date_label.pack()
+
+zones = [
+    "Asia/Kolkata",
+    "UTC",
+    "America/New_York",
+    "Europe/London",
+    "Asia/Tokyo",
+    "Australia/Sydney"
+]
+
+timezone = ttk.Combobox(root, values=zones, width=30)
+timezone.current(0)
+timezone.pack()
+
+def update_clock():
+    tz = pytz.timezone(timezone.get())
+    now = datetime.now(tz)
+
+    current_time = now.strftime("%H:%M:%S")
+    current_date = now.strftime("%A, %d %B %Y")
+
+    time_label.config(text=current_time)
+    date_label.config(text=current_date)
+
+    root.after(1000, update_clock)
+
+update_clock()
 
 root.mainloop()

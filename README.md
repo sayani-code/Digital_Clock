@@ -9,7 +9,7 @@ A simple digital clock application built using Python. The clock displays the cu
 - Simple and clean user interface
 - Built using Python and Tkinter
 - Date display
--Stopwatch
+- Stopwatch
 
 ## 🛠️ Technologies Used
 
