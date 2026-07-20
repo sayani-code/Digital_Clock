@@ -9,11 +9,13 @@ root = tk.Tk()
 root.title("Advanced Digital Clock")
 root.geometry("550x650")
 
+dark_mode = True
 bg_dark = "#161D3D"
-fg_dark = "white"
+fg_dark = "#bfaaaa"
 
-bg_light = "white"
-fg_light = "black"
+bg_light = "#d9dbc6"
+fg_light = "#061937"
+
 
 root.configure(bg=bg_dark)
 
@@ -52,6 +54,32 @@ def update_clock():
 
     root.after(1000, update_clock)
 
+#Mode change future
+def toggle_theme():
+    global dark_mode
+    dark_mode = not dark_mode
+    if dark_mode:
+        bg = bg_dark
+        fg = fg_dark
+    else:
+        bg = bg_light
+        fg = fg_light
+
+    root.configure(bg=bg)
+    widgets = root.winfo_children()
+
+    for widget in widgets:
+        try:
+            widget.configure(bg=bg, fg=fg)
+        except:
+            pass
+
+tk.Button(root,
+          text="Dark / Light Mode",
+          command=toggle_theme).pack(pady=10)
+
+
+toggle_theme()
 update_clock()
 
 root.mainloop()
