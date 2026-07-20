@@ -55,6 +55,7 @@ def update_clock():
     root.after(1000, update_clock)
 
 #Mode change future
+
 def toggle_theme():
     global dark_mode
     dark_mode = not dark_mode
@@ -75,11 +76,80 @@ def toggle_theme():
             pass
 
 tk.Button(root,
-          text="Dark / Light Mode",
+          text="Mode Change",
           command=toggle_theme).pack(pady=10)
 
 
-toggle_theme()
+# Stopwatch
+
+stopwatch_running = False
+stopwatch_seconds = 0
+
+
+def update_stopwatch():
+    global stopwatch_seconds
+
+    if stopwatch_running:
+        stopwatch_seconds += 1
+
+        hrs = stopwatch_seconds // 3600
+        mins = (stopwatch_seconds % 3600) // 60
+        secs = stopwatch_seconds % 60
+
+        stopwatch_label.config(
+            text=f"{hrs:02}:{mins:02}:{secs:02}")
+
+    root.after(1000, update_stopwatch)
+
+
+def start_stopwatch():
+    global stopwatch_running
+    stopwatch_running = True
+
+
+def stop_stopwatch():
+    global stopwatch_running
+    stopwatch_running = False
+
+
+def reset_stopwatch():
+    global stopwatch_seconds
+    stopwatch_seconds = 0
+    stopwatch_label.config(text="00:00:00")
+
+
+tk.Label(root,
+         text="Stopwatch",
+         bg=bg_dark,
+         fg=fg_dark,
+         font=("Arial", 14)).pack(pady=10)
+
+stopwatch_label = tk.Label(root,
+                           text="00:00:00",
+                           font=("Arial", 22),
+                           bg=bg_dark,
+                           fg=fg_dark)
+stopwatch_label.pack()
+
+frame = tk.Frame(root)
+frame.pack()
+
+tk.Button(frame, text="Start",
+          command=start_stopwatch).grid(row=0, column=0)
+
+tk.Button(frame, text="Stop",
+          command=stop_stopwatch).grid(row=0, column=1)
+
+tk.Button(frame, text="Reset",
+          command=reset_stopwatch).grid(row=0, column=2)
+
+
 update_clock()
+toggle_theme()
+update_stopwatch()
+start_stopwatch()
+stop_stopwatch()
+reset_stopwatch()
+
 
 root.mainloop()
