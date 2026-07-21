@@ -11,6 +11,10 @@ A simple digital clock application built using Python. The clock displays the cu
 - Date display
 - Dark/Light mode
 - Stopwatch
+- Add multiple time zones
+- Alarm feature
+- Timer Set
+
 
 ## 🛠️ Technologies Used
 
@@ -46,16 +50,6 @@ cd Digital-Clock
 ```bash
 python digital_clock.py
 ```
-
-
-## 🎯 Future Improvements
-
-- Add multiple time zones
-- Alarm feature
-- Timer Set
-
-
-
 
 ## 🤝 Contributing
 
